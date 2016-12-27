@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+
+  	<listener>
+		<listener-class>com.zsx.login.utils.ListenerLoadConfig</listener-class>
+	</listener> 
+
+	<servlet>
+		<servlet-name>AddUserServlet</servlet-name>
+		<servlet-class>com.zsx.login.servlets.AddUserServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>GetUserList</servlet-name>
+		<servlet-class>com.zsx.login.servlets.GetUserList</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>Test</servlet-name>
+		<servlet-class>com.zsx.login.servlets.Test</servlet-class>
+	</servlet>
+	
+	
+	<servlet-mapping>
+		<servlet-name>Test</servlet-name>
+		<url-pattern>/Test</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>AddUserServlet</servlet-name>
+		<url-pattern>/AddUserServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>GetUserList</servlet-name>
+		<url-pattern>/GetUserList</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>RegistUser</servlet-name>
+		<servlet-class>com.zsx.login.servlets.RegistUser</servlet-class>
+	</servlet>
+	
+
+	<servlet-mapping>
+		<servlet-name>RegistUser</servlet-name>
+		<url-pattern>/RegistUser</url-pattern>
+	</servlet-mapping>
+  
+  
+  
+</web-app>
+
+
+	
