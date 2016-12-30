@@ -1,7 +1,9 @@
 package com.zsx.Daos;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.Time;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
@@ -21,22 +23,28 @@ public class UserDaoImp extends BaseDBFactor<UserBean> {
 	public boolean insertData(UserBean user) {
 		Connection conn=null;
 		PreparedStatement stat=null;
-		boolean rowCount=false;
+		 int rowCount=0;
 		try {
 			conn=getConn();
-			String sql="insert into t_user(userphone, userpass) value(?,?)";
+			String sql="insert into t_user(userphone, userpass,createtime) value(?,?,?)";
 			stat=conn.prepareStatement(sql);
 			//设置值
 			stat.setString(1, user.getUserPhone());
 			stat.setString(2, user.getUserPass());
+			java.util.Date current=new java.util.Date();
+			Date sqlDate=new Date(current.getTime());
+			stat.setDate(3, sqlDate);
 			//执行
-			rowCount=stat.execute();
+			rowCount=stat.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
 			closeConn(stat, conn);
 		}
-		return rowCount;
+		if(rowCount>0){
+			return true;
+		}
+		return false;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

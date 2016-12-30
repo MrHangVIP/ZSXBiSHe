@@ -6,23 +6,24 @@
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
 
-  	<listener>
-		<listener-class>com.zsx.login.utils.ListenerLoadConfig</listener-class>
+	<listener>
+		<listener-class>com.zsx.utils.ListenerLoadConfig</listener-class>
 	</listener> 
+  	
 
 	<servlet>
 		<servlet-name>AddUserServlet</servlet-name>
-		<servlet-class>com.zsx.login.servlets.AddUserServlet</servlet-class>
+		<servlet-class>com.zsx.servlets.AddUserServlet</servlet-class>
 	</servlet>
 	
 	<servlet>
 		<servlet-name>GetUserList</servlet-name>
-		<servlet-class>com.zsx.login.servlets.GetUserList</servlet-class>
+		<servlet-class>com.zsx.servlets.GetUserList</servlet-class>
 	</servlet>
 	
 	<servlet>
 		<servlet-name>Test</servlet-name>
-		<servlet-class>com.zsx.login.servlets.Test</servlet-class>
+		<servlet-class>com.zsx.servlets.Test</servlet-class>
 	</servlet>
 	
 	
@@ -44,7 +45,7 @@
 
 	<servlet>
 		<servlet-name>RegistUser</servlet-name>
-		<servlet-class>com.zsx.login.servlets.RegistUser</servlet-class>
+		<servlet-class>com.zsx.servlets.RegistUser</servlet-class>
 	</servlet>
 	
 

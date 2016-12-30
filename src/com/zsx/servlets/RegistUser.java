@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.ObjectUtils;
+
 import com.zsx.Daos.UserDaoImp;
 import com.zsx.beans.UserBean;
 
@@ -24,6 +26,7 @@ import net.sf.json.JSONObject;
  */
 public class RegistUser extends HttpServlet{
 
+	
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -32,15 +35,11 @@ public class RegistUser extends HttpServlet{
 		response.setCharacterEncoding("UTF-8");
 		// response.setContentType("application/json; charset=utf-8");
 		// {"result":"0","resultList":[{json},{json},{json}]};
-//		String userPhone=request.getParameter("userPhone");
-//		String userPass=request.getParameter("userPass");
-		String userPhone="15651071230";
-		String userPass="123";
-		
+		String userPhone=request.getParameter("userPhone");
+		String userPass=request.getParameter("userPass");
 		UserBean user=new UserBean(userPhone, userPass);
 		UserDaoImp usermodel=new UserDaoImp();
 		boolean result=usermodel.insertData(user);
-		
 		Map<String, Object> map = new HashMap();
 		if(result){
 			map.put("result", "success");
