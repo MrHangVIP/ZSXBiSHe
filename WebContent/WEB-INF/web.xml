@@ -10,12 +10,6 @@
 		<listener-class>com.zsx.utils.ListenerLoadConfig</listener-class>
 	</listener> 
   	
-
-	<servlet>
-		<servlet-name>AddUserServlet</servlet-name>
-		<servlet-class>com.zsx.servlets.AddUserServlet</servlet-class>
-	</servlet>
-	
 	<servlet>
 		<servlet-name>GetUserList</servlet-name>
 		<servlet-class>com.zsx.servlets.GetUserList</servlet-class>
@@ -33,11 +27,6 @@
 	</servlet-mapping>
 	
 	<servlet-mapping>
-		<servlet-name>AddUserServlet</servlet-name>
-		<url-pattern>/AddUserServlet</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
 		<servlet-name>GetUserList</servlet-name>
 		<url-pattern>/GetUserList</url-pattern>
 	</servlet-mapping>
@@ -52,6 +41,17 @@
 	<servlet-mapping>
 		<servlet-name>RegistUser</servlet-name>
 		<url-pattern>/RegistUser</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>LoginUser</servlet-name>
+		<servlet-class>com.zsx.servlets.LoginUser</servlet-class>
+	</servlet>
+	
+
+	<servlet-mapping>
+		<servlet-name>LoginUser</servlet-name>
+		<url-pattern>/LoginUser</url-pattern>
 	</servlet-mapping>
   
   

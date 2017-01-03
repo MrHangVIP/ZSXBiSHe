@@ -11,6 +11,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 
 import com.zsx.Daos.base.BaseDBFactor;
 import com.zsx.beans.UserBean;
+import com.zsx.utils.DateUtil;
 
 /**
  * 用户相关数据操作的实现类
@@ -26,14 +27,14 @@ public class UserDaoImp extends BaseDBFactor<UserBean> {
 		 int rowCount=0;
 		try {
 			conn=getConn();
-			String sql="insert into t_user(userphone, userpass,createtime) value(?,?,?)";
+			String sql="insert into t_user(userphone, userpass,createtime,nickname,status) value(?,?,?,?,?)";
 			stat=conn.prepareStatement(sql);
 			//设置值
 			stat.setString(1, user.getUserPhone());
 			stat.setString(2, user.getUserPass());
-			java.util.Date current=new java.util.Date();
-			Date sqlDate=new Date(current.getTime());
-			stat.setDate(3, sqlDate);
+			stat.setString(3, DateUtil.getCurrentDate());
+			stat.setString(4,user.getUserPhone());
+			stat.setString(5,user.getStatus());
 			//执行
 			rowCount=stat.executeUpdate();
 		} catch (Exception e) {
@@ -56,7 +57,7 @@ public class UserDaoImp extends BaseDBFactor<UserBean> {
 		try {
 			conn=getConn();
 			QueryRunner qr=new QueryRunner();
-			String sql="select * from t_user where userid = ?";
+			String sql="select * from t_user where stuid = ?";
 			userList=(List<UserBean>)qr.query(conn,sql,new BeanHandler(UserBean.class),userid);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,6 +75,45 @@ public class UserDaoImp extends BaseDBFactor<UserBean> {
 	@Override
 	public boolean deleteData(int id) {
 		return false;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public UserBean login(String userPhone,String userPass){
+		Connection conn=null;
+		UserBean userbean=null;
+		try {
+			conn=getConn();
+			QueryRunner qr=new QueryRunner();
+			String sql="select * from t_user where userphone = ? and userpass = ?";
+			userbean=(UserBean)qr.query(conn,sql,new BeanHandler<UserBean>(UserBean.class),userPhone,userPass);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			closeConn(null, conn);
+		}
+		return userbean;
+		
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public boolean userPhoneChecked(String userPhone) {
+		Connection conn=null;
+		List<UserBean> userList=null;
+		try {
+			conn=getConn();
+			QueryRunner qr=new QueryRunner();
+			String sql="select * from t_user where userphone = ?";
+			userList=(List<UserBean>)qr.query(conn,sql,new BeanHandler(UserBean.class),userPhone);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			closeConn(null, conn);
+		}
+		if(userList==null){
+			return false;
+		}
+		return true;
 	}
 
 }

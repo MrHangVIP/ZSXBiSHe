@@ -24,7 +24,7 @@ import net.sf.json.JSONObject;
  * @author moram
  *
  */
-public class RegistUser extends HttpServlet{
+public class LoginUser extends HttpServlet{
 
 	
 	private static final long serialVersionUID = 1L;
@@ -37,23 +37,16 @@ public class RegistUser extends HttpServlet{
 		// {"result":"0","resultList":[{json},{json},{json}]};
 		String userPhone=request.getParameter("userPhone");
 		String userPass=request.getParameter("userPass");
-		String status=request.getParameter("status");
-		UserBean user=new UserBean();
-		user.setUserPhone(userPhone);
-		user.setUserPass(userPass);
-		user.setStatus(status);
 		UserDaoImp usermodel=new UserDaoImp();
-		boolean isExist=usermodel.userPhoneChecked(userPhone);
+		UserBean userbean=usermodel.login(userPhone,userPass);
 		Map<String, Object> map = new HashMap<String, Object>();
-		if(isExist){
-			map.put("result", "exist");
+		if(userbean==null){
+			map.put("result", "fail");
+			map.put("data", "");
 		}else{
-			boolean result=usermodel.insertData(user);
-			if(result){
-				map.put("result", "success");
-			}else{
-				map.put("result", "fail");
-			}
+			JSONObject itemJson = JSONObject.fromObject(userbean);
+			map.put("result", "success");
+			map.put("data",  itemJson.toString());
 		}
 		
 		PrintWriter pw = response.getWriter();
