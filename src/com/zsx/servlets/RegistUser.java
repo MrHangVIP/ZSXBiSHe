@@ -46,7 +46,8 @@ public class RegistUser extends HttpServlet{
 		boolean isExist=usermodel.userPhoneChecked(userPhone);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(isExist){
-			map.put("result", "exist");
+			map.put("result", "fail");
+			map.put("data", "exist");
 		}else{
 			boolean result=usermodel.insertData(user);
 			if(result){

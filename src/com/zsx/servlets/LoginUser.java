@@ -37,6 +37,7 @@ public class LoginUser extends HttpServlet{
 		// {"result":"0","resultList":[{json},{json},{json}]};
 		String userPhone=request.getParameter("userPhone");
 		String userPass=request.getParameter("userPass");
+		String mac=request.getParameter("MAC");
 		UserDaoImp usermodel=new UserDaoImp();
 		UserBean userbean=usermodel.login(userPhone,userPass);
 		Map<String, Object> map = new HashMap<String, Object>();

@@ -99,12 +99,12 @@ public class UserDaoImp extends BaseDBFactor<UserBean> {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public boolean userPhoneChecked(String userPhone) {
 		Connection conn=null;
-		List<UserBean> userList=null;
+		UserBean userList=null;
 		try {
 			conn=getConn();
 			QueryRunner qr=new QueryRunner();
 			String sql="select * from t_user where userphone = ?";
-			userList=(List<UserBean>)qr.query(conn,sql,new BeanHandler(UserBean.class),userPhone);
+			userList=(UserBean)qr.query(conn,sql,new BeanHandler(UserBean.class),userPhone);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
