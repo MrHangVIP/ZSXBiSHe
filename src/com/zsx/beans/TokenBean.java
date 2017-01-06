@@ -1,8 +1,6 @@
 package com.zsx.beans;
 
-import java.io.Serializable;
-
-public class TokenBean implements Serializable {
+public class TokenBean  {
 	
 	private int id;
 	
@@ -12,6 +10,15 @@ public class TokenBean implements Serializable {
 	
 	private long createTime;
 
+	public TokenBean(){
+		
+	}
+	
+	public TokenBean(String token,String userPhone){
+		this.token=token;
+		this.userPhone=userPhone;
+	}
+	
 	public int getId() {
 		return id;
 	}

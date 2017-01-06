@@ -1,61 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.0" 
-	xmlns="http://java.sun.com/xml/ns/javaee" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
 
 	<listener>
 		<listener-class>com.zsx.utils.ListenerLoadConfig</listener-class>
-	</listener> 
-  	
-	<servlet>
-		<servlet-name>GetUserList</servlet-name>
-		<servlet-class>com.zsx.servlets.GetUserList</servlet-class>
-	</servlet>
-	
+	</listener>
+
 	<servlet>
 		<servlet-name>Test</servlet-name>
 		<servlet-class>com.zsx.servlets.Test</servlet-class>
 	</servlet>
-	
-	
+
+
 	<servlet-mapping>
 		<servlet-name>Test</servlet-name>
 		<url-pattern>/Test</url-pattern>
 	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>GetUserList</servlet-name>
-		<url-pattern>/GetUserList</url-pattern>
-	</servlet-mapping>
-
 
 	<servlet>
 		<servlet-name>RegistUser</servlet-name>
 		<servlet-class>com.zsx.servlets.RegistUser</servlet-class>
 	</servlet>
-	
+
 
 	<servlet-mapping>
 		<servlet-name>RegistUser</servlet-name>
 		<url-pattern>/RegistUser</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>LoginUser</servlet-name>
 		<servlet-class>com.zsx.servlets.LoginUser</servlet-class>
 	</servlet>
-	
+
 
 	<servlet-mapping>
 		<servlet-name>LoginUser</servlet-name>
 		<url-pattern>/LoginUser</url-pattern>
 	</servlet-mapping>
-  
-  
-  
+
+	<servlet>
+		<servlet-name>GetUserInfo</servlet-name>
+		<servlet-class>com.zsx.servlets.GetUserInfo</servlet-class>
+	</servlet>
+
+
+	<servlet-mapping>
+		<servlet-name>GetUserInfo</servlet-name>
+		<url-pattern>/GetUserInfo</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UpdateUserInfo</servlet-name>
+		<servlet-class>com.zsx.servlets.UpdateUserInfo</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>UpdateUserInfo</servlet-name>
+		<url-pattern>/UpdateUserInfo</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ImageUpload</servlet-name>
+		<servlet-class>com.zsx.servlets.ImageUpload</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ImageUpload</servlet-name>
+		<url-pattern>/ImageUpload</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>UpdateHeadUrl</servlet-name>
+		<servlet-class>com.zsx.servlets.UpdateHeadUrl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>UpdateHeadUrl</servlet-name>
+		<url-pattern>/UpdateHeadUrl</url-pattern>
+	</servlet-mapping>
+
+
+
+
 </web-app>
 
 

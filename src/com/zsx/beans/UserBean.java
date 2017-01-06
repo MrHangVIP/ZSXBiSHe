@@ -26,6 +26,18 @@ public class UserBean {
 	
 	private String headUrl;
 	
+	public UserBean(){
+		
+	}
+	
+	public UserBean(String userPhone,String status,String nickName,String city,String birthday){
+		this.userPhone=userPhone;
+		this.status=status;
+		this.nickName=nickName;
+		this.city=city;
+		this.birthday=birthday;
+	}
+	
 	public int getStuId() {
 		return stuId;
 	}

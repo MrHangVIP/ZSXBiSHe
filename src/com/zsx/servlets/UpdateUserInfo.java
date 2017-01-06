@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.zsx.servlets;
 
 import java.io.IOException;
@@ -13,49 +10,40 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.ObjectUtils;
-
+import com.zsx.Daos.TokenDaoImp;
 import com.zsx.Daos.UserDaoImp;
 import com.zsx.beans.UserBean;
 import com.zsx.servlets.base.BaseServletFactory;
 
 import net.sf.json.JSONObject;
 
-/**
- * @author moram
- *
- */
-public class RegistUser extends BaseServletFactory{
-
-	
+public class UpdateUserInfo extends BaseServletFactory {
 	private static final long serialVersionUID = 1L;
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		String userPhone=request.getParameter("userPhone");
-		String userPass=request.getParameter("userPass");
 		String status=request.getParameter("status");
-		UserBean user=new UserBean();
-		user.setUserPhone(userPhone);
-		user.setUserPass(userPass);
-		user.setStatus(status);
-		UserDaoImp usermodel=new UserDaoImp();
-		boolean isExist=usermodel.userPhoneChecked(userPhone);
+		String nickName=request.getParameter("nickName");
+		String city=request.getParameter("city");
+		String birthday=request.getParameter("birthday");
+		String token=request.getParameter("token");
 		Map<String, Object> map = new HashMap<String, Object>();
-		if(isExist){
-			map.put("result", "fail");
-			map.put("data", "exist");
+		if(!tokenChecked(userPhone, token)){
+			map=getJsonMap();
 		}else{
-			boolean result=usermodel.insertData(user);
-			if(result){
+			UserBean user=new UserBean(userPhone, status, nickName, city, birthday);
+			UserDaoImp usermodel=new UserDaoImp();
+			boolean  update=usermodel.updateData(user);
+			if(update){
 				map.put("result", "success");
+				map.put("data",  "");
 			}else{
 				map.put("result", "fail");
+				map.put("data", "update fail");
 			}
 		}
-		
 		PrintWriter pw = response.getWriter();
 		JSONObject json = JSONObject.fromObject(map);
 		pw.print(json.toString());
@@ -63,12 +51,8 @@ public class RegistUser extends BaseServletFactory{
 		pw.close();
 	}
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doGet(req, resp);
-	}
-	
-	
-	
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		this.doGet(request, response);
+	}
 }

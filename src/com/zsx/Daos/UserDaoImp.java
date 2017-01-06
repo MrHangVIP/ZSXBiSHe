@@ -69,6 +69,27 @@ public class UserDaoImp extends BaseDBFactor<UserBean> {
 
 	@Override
 	public boolean updateData(Object... obj) {
+		Connection conn=null;
+		PreparedStatement stat=null;
+		 int rowCount=0;
+		try {
+			conn=getConn();
+			String sql="update t_token set token = ? and createtime = ? where userphone = ? ";
+			stat=conn.prepareStatement(sql);
+			//设置值
+			stat.setString(1, (String)obj[0]);
+			stat.setString(2,(String)obj[1]);
+			stat.setLong(3, System.currentTimeMillis());
+			//执行
+			rowCount=stat.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			closeConn(stat, conn);
+		}
+		if(rowCount>0){
+			return true;
+		}
 		return false;
 	}
 
@@ -77,8 +98,59 @@ public class UserDaoImp extends BaseDBFactor<UserBean> {
 		return false;
 	}
 	
+	public boolean updateData(UserBean user) {
+		Connection conn=null;
+		PreparedStatement stat=null;
+		 int rowCount=0;
+		try {
+			conn=getConn();
+			String sql="update t_user set nickname = ? ,status = ? ,city = ? , birthday = ? , lastupdatetime = ? where userphone = ? ";
+			stat=conn.prepareStatement(sql);
+			//设置值
+			stat.setString(1, user.getNickName());
+			stat.setString(2,user.getStatus());
+			stat.setString(3,user.getCity());
+			stat.setString(4,user.getBirthday());
+			stat.setLong(5, System.currentTimeMillis());
+			stat.setString(6,user.getUserPhone());
+			//执行
+			rowCount=stat.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			closeConn(stat, conn);
+		}
+		if(rowCount>0){
+			return true;
+		}
+		return false;
+	}
 	
-	@SuppressWarnings("unchecked")
+	public boolean updateHeadUrl(String userPhone,String headUrl) {
+		Connection conn=null;
+		PreparedStatement stat=null;
+		 int rowCount=0;
+		try {
+			conn=getConn();
+			String sql="update t_user set headurl= ? where userphone = ? ";
+			stat=conn.prepareStatement(sql);
+			//设置值
+			stat.setString(1,headUrl);
+			stat.setString(2,userPhone);
+			//执行
+			rowCount=stat.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			closeConn(stat, conn);
+		}
+		if(rowCount>0){
+			return true;
+		}
+		return false;
+	}
+	
+	
 	public UserBean login(String userPhone,String userPass){
 		Connection conn=null;
 		UserBean userbean=null;
@@ -87,6 +159,23 @@ public class UserDaoImp extends BaseDBFactor<UserBean> {
 			QueryRunner qr=new QueryRunner();
 			String sql="select * from t_user where userphone = ? and userpass = ?";
 			userbean=(UserBean)qr.query(conn,sql,new BeanHandler<UserBean>(UserBean.class),userPhone,userPass);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			closeConn(null, conn);
+		}
+		return userbean;
+		
+	}
+	
+	public UserBean getUserInfo(String userPhone){
+		Connection conn=null;
+		UserBean userbean=null;
+		try {
+			conn=getConn();
+			QueryRunner qr=new QueryRunner();
+			String sql="select * from t_user where userphone = ? ";
+			userbean=(UserBean)qr.query(conn,sql,new BeanHandler<UserBean>(UserBean.class),userPhone);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{

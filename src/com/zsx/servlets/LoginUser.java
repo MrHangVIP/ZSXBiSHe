@@ -15,8 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.ObjectUtils;
 
+import com.zsx.Daos.TokenDaoImp;
 import com.zsx.Daos.UserDaoImp;
+import com.zsx.Daos.base.BaseDBFactor;
+import com.zsx.beans.TokenBean;
 import com.zsx.beans.UserBean;
+import com.zsx.utils.Constant;
 
 import net.sf.json.JSONObject;
 
@@ -33,8 +37,6 @@ public class LoginUser extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		// response.setContentType("application/json; charset=utf-8");
-		// {"result":"0","resultList":[{json},{json},{json}]};
 		String userPhone=request.getParameter("userPhone");
 		String userPass=request.getParameter("userPass");
 		String mac=request.getParameter("MAC");
@@ -45,8 +47,13 @@ public class LoginUser extends HttpServlet{
 			map.put("result", "fail");
 			map.put("data", "");
 		}else{
+			new TokenDaoImp().deleteData(userPhone);
 			JSONObject itemJson = JSONObject.fromObject(userbean);
-			map.put("result", "success");
+			String token =Constant.productToken(mac);
+			if(!new TokenDaoImp().insertData(new TokenBean(token,userPhone))){
+				new TokenDaoImp().insertData(new TokenBean(token,userPhone));
+			}
+			map.put("result", token);
 			map.put("data",  itemJson.toString());
 		}
 		
