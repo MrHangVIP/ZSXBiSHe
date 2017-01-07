@@ -82,6 +82,26 @@
 		<servlet-name>UpdateHeadUrl</servlet-name>
 		<url-pattern>/UpdateHeadUrl</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GetRandomArticle</servlet-name>
+		<servlet-class>com.zsx.servlets.GetRandomArticle</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>GetRandomArticle</servlet-name>
+		<url-pattern>/GetRandomArticle</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GetTypeArticle</servlet-name>
+		<servlet-class>com.zsx.servlets.GetTypeArticle</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>GetTypeArticle</servlet-name>
+		<url-pattern>/GetTypeArticle</url-pattern>
+	</servlet-mapping>
 
 
 

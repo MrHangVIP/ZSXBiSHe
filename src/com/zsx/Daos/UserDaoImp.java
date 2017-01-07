@@ -132,11 +132,12 @@ public class UserDaoImp extends BaseDBFactor<UserBean> {
 		 int rowCount=0;
 		try {
 			conn=getConn();
-			String sql="update t_user set headurl= ? where userphone = ? ";
+			String sql="update t_user set headurl= ? , lastupdatetime = ? where userphone = ? ";
 			stat=conn.prepareStatement(sql);
 			//设置值
 			stat.setString(1,headUrl);
-			stat.setString(2,userPhone);
+			stat.setLong(2, System.currentTimeMillis());
+			stat.setString(3,userPhone);
 			//执行
 			rowCount=stat.executeUpdate();
 		} catch (Exception e) {
