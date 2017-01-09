@@ -26,9 +26,8 @@ public class ImageUpload extends BaseServletFactory {
 	 */
 	private static final long serialVersionUID = 222834079692167531L;
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
+	@Override
+	protected Map<String, String> dataModel(HttpServletRequest request, HttpServletResponse response) {
 		String image = request.getParameter("image");
 		String fileName = System.currentTimeMillis() + ".png";
 		// /ImageUpload
@@ -48,29 +47,22 @@ public class ImageUpload extends BaseServletFactory {
 		}
 		// 将二进制转换成输出流
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		bos.write(imageByte);
-		// 写入文件
-		File imageFile = new File(imagePath + "\\image\\" + fileName);
-		// 根据文件创建文件的输出流
-		OutputStream out = new FileOutputStream(imageFile);
-		bos.writeTo(out);
-		out.close();
-		bos.close();
-		
-		Map<String,Object> map=new HashMap<>();
+		try {
+			bos.write(imageByte);
+			// 写入文件
+			File imageFile = new File(imagePath + "\\image\\" + fileName);
+			// 根据文件创建文件的输出流
+			OutputStream out = new FileOutputStream(imageFile);
+			bos.writeTo(out);
+			out.close();
+			bos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Map<String,String> map=new HashMap<>();
 		map.put("result", "success");
 		map.put("data", fileName);
-		PrintWriter pw = response.getWriter();
-		JSONObject json = JSONObject.fromObject(map);
-		pw.print(json.toString());
-		System.out.println("json :"+json.toString());
-		pw.close();
-
-	}
-
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		this.doGet(request, response);
+		return map;
 	}
 
 }

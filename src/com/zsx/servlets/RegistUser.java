@@ -3,23 +3,15 @@
  */
 package com.zsx.servlets;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang.ObjectUtils;
 
 import com.zsx.Daos.UserDaoImp;
 import com.zsx.beans.UserBean;
 import com.zsx.servlets.base.BaseServletFactory;
-
-import net.sf.json.JSONObject;
 
 /**
  * @author moram
@@ -31,9 +23,7 @@ public class RegistUser extends BaseServletFactory{
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
+	protected Map<String, String> dataModel(HttpServletRequest request, HttpServletResponse response) {
 		String userPhone=request.getParameter("userPhone");
 		String userPass=request.getParameter("userPass");
 		String status=request.getParameter("status");
@@ -43,7 +33,7 @@ public class RegistUser extends BaseServletFactory{
 		user.setStatus(status);
 		UserDaoImp usermodel=new UserDaoImp();
 		boolean isExist=usermodel.userPhoneChecked(userPhone);
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, String> map = new HashMap<String, String>();
 		if(isExist){
 			map.put("result", "fail");
 			map.put("data", "exist");
@@ -55,17 +45,7 @@ public class RegistUser extends BaseServletFactory{
 				map.put("result", "fail");
 			}
 		}
-		
-		PrintWriter pw = response.getWriter();
-		JSONObject json = JSONObject.fromObject(map);
-		pw.print(json.toString());
-		System.out.println("json  :" + json.toString());
-		pw.close();
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doGet(req, resp);
+		return map;
 	}
 	
 	
