@@ -28,6 +28,6 @@ public class GetUserInfo extends BaseServletFactory {
 			map.put("result", token);
 			map.put("data",  itemJson.toString());
 		}
-		return null;
+		return map;
 	}
 }

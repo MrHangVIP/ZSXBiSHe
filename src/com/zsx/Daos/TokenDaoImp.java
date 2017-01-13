@@ -6,11 +6,10 @@ import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import com.zsx.Daos.base.BaseDBFactor;
 import com.zsx.beans.TokenBean;
-import com.zsx.beans.UserBean;
-import com.zsx.utils.DateUtil;
 
 public class TokenDaoImp extends BaseDBFactor<TokenBean> {
 
@@ -152,7 +151,7 @@ public class TokenDaoImp extends BaseDBFactor<TokenBean> {
 			QueryRunner qr=new QueryRunner();
 			
 			String sql="select * from t_token where createtime <= ?";
-			tokenList=(List<TokenBean>)qr.query(conn,sql,new BeanHandler(TokenBean.class),curTime-time);
+			tokenList=(List<TokenBean>)qr.query(conn,sql,new BeanListHandler(TokenBean.class),curTime-time);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{

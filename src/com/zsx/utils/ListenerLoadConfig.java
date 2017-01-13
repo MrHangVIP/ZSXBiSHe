@@ -33,6 +33,7 @@ public class ListenerLoadConfig implements ServletContextListener {
 			
 			@Override
 			public void run() {
+				System.out.println("getAbandonedList");
 				TokenDaoImp tokenDao=new TokenDaoImp();
 				List<TokenBean> abandonedList= tokenDao.getAbandonedList(TOKEN_CHECKED_TIME);
 				if(abandonedList!=null){
@@ -41,6 +42,6 @@ public class ListenerLoadConfig implements ServletContextListener {
 					}
 				}
 			}
-		}, TOKEN_CHECKED_TIME);
+		}, 1000,TOKEN_CHECKED_TIME);
 	}
 }

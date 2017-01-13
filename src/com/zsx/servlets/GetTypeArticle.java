@@ -31,6 +31,7 @@ public class GetTypeArticle extends BaseServletFactory {
 			map.put("data", "");
 		} else {
 			JSONArray itemJson = JSONArray.fromObject(articleList);
+			map.put("result", "success");
 			map.put("data", itemJson.toString());
 		}
 		return map;
