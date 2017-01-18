@@ -38,12 +38,22 @@ public abstract class BaseServletFactory extends HttpServlet {
 	}
 	
 
+	/**
+	 * token检测
+	 * @param userPhone
+	 * @param token
+	 * @return
+	 */
 	protected boolean tokenChecked(String userPhone,String token){
 		TokenDaoImp tokenmodel=new TokenDaoImp();
 		boolean tokenUserful=tokenmodel.tokenChecked(userPhone, token);
 		return tokenUserful;
 	}
 	
+	/**
+	 * token失效返回
+	 * @return
+	 */
 	protected Map<String,String> getJsonMap(){
 		Map<String, String> map = new HashMap<String, String>();
 			map.put("result", "fail");
