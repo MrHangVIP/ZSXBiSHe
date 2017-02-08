@@ -20,21 +20,24 @@ public class WritePostBar extends BaseServletFactory {
 	@Override
 	protected Map<String, String> dataModel(HttpServletRequest request, HttpServletResponse response) {
 		String userPhone=request.getParameter("userPhone");
-		String token=request.getParameter("token");
 		String nickName=request.getParameter("nickName");
 		String title=request.getParameter("title");
 		String content=request.getParameter("content");
 		String imageUrl=request.getParameter("imageUrl");
-		boolean effectToken=tokenChecked(userPhone, token);
-		if(!effectToken){
-			return getJsonMap();
-		}
+		String order=request.getParameter("order");
+		String headUrl=request.getParameter("headUrl");
+//		boolean effectToken=tokenChecked(userPhone, token);
+//		if(!effectToken){
+//			return getJsonMap();
+//		}
 		PostBarItem postBar=new PostBarItem();
 		postBar.setContent(content);
-		postBar.setUserphone(userPhone);
+		postBar.setUserPhone(userPhone);
 		postBar.setNickName(nickName);
 		postBar.setTitle(title);
 		postBar.setImageUrl(imageUrl);
+		postBar.setOrders(order);
+		postBar.setHeadUrl(headUrl);
 		PostBarDaoImpl barDaoImpl=new PostBarDaoImpl();
 		boolean result=barDaoImpl.insertData(postBar);
 		Map<String,String> map=new HashMap<>();

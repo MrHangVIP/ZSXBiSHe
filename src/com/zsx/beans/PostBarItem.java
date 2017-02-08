@@ -4,7 +4,7 @@ public class PostBarItem {
 	
 	private int postbarId;
 	
-	private String userphone;
+	private String userPhone;
 	
 	private String nickName;
 	
@@ -15,6 +15,10 @@ public class PostBarItem {
 	private String createTime;
 	
 	private String imageUrl;
+	
+	private String headUrl;
+	
+	private String orders;
 
 	public int getPostbarId() {
 		return postbarId;
@@ -24,12 +28,12 @@ public class PostBarItem {
 		this.postbarId = postbarId;
 	}
 
-	public String getUserphone() {
-		return userphone;
+	public String getUserPhone() {
+		return userPhone;
 	}
 
-	public void setUserphone(String userphone) {
-		this.userphone = userphone;
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
 	}
 
 	public String getNickName() {
@@ -70,6 +74,22 @@ public class PostBarItem {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+
+	public String getHeadUrl() {
+		return headUrl;
+	}
+
+	public void setHeadUrl(String headUrl) {
+		this.headUrl = headUrl;
+	}
+
+	public String getOrders() {
+		return orders;
+	}
+
+	public void setOrders(String orders) {
+		this.orders = orders;
 	}
 	
 	

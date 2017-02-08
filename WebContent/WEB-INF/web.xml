@@ -102,7 +102,26 @@
 		<servlet-name>GetTypeArticle</servlet-name>
 		<url-pattern>/GetTypeArticle</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>WritePostBar</servlet-name>
+		<servlet-class>com.zsx.servlets.WritePostBar</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>WritePostBar</servlet-name>
+		<url-pattern>/WritePostBar</url-pattern>
+	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>GetPostBar</servlet-name>
+		<servlet-class>com.zsx.servlets.GetPostBar</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>GetPostBar</servlet-name>
+		<url-pattern>/GetPostBar</url-pattern>
+	</servlet-mapping>
 
 
 
