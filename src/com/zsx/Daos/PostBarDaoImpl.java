@@ -58,7 +58,6 @@ public class PostBarDaoImpl extends BaseDBFactor<PostBarItem> {
 		return false;
 	}
 
-	@SuppressWarnings("unused")
 	public List<PostBarItem> getDataList() {
 		Connection conn = null;
 		List<PostBarItem> postBarList = null;
