@@ -40,16 +40,23 @@ public class ImageUpload extends BaseServletFactory {
 		// getRealPath=request.getSession().getServletContext().getRealPath(request.getRequestURI());
 		// D:\GitWorkSpace\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\ZSXBiShe\
 		String imagePath = this.getServletConfig().getServletContext().getRealPath("/");
-
-		String image = request.getParameter("image");
-		String[] images = image.split(token);
+		
+		List<String> images = new ArrayList<String>();
 		List<String> imageNameList = new ArrayList<String>();
-		for (int i = 0; i < images.length; i++) {
+		Map<String,String[]> params=request.getParameterMap();
+		for(int i=1;i<=params.keySet().size()-2;i++){
+			for(String key:params.keySet()){
+				if(key.equals("image"+i)){
+					images.add(request.getParameter(key));
+				}
+			}
+		}
+		for (int i = 0; i < images.size(); i++) {
 			String fileName = System.currentTimeMillis() + ".png";
 			// 获取base64的图片二进制
 			byte[] imageByte = null;
 			try {
-				imageByte = Base64.decode(images[i]);
+				imageByte = Base64.decode(images.get(i));
 			} catch (Base64DecodingException e) {
 				e.printStackTrace();
 				System.out.println("json  :" + e.toString());
