@@ -26,9 +26,14 @@ public class GetPostBar extends BaseServletFactory {
 
 	@Override
 	protected Map<String, String> dataModel(HttpServletRequest request, HttpServletResponse response) { 
-		
+		String userPhone=request.getParameter("userPhone");
+		String token=request.getParameter("token");
+		boolean effectToken=tokenChecked(userPhone, token);
+		if(!effectToken){
+			return getJsonMap();
+		}
 		PostBarDaoImpl postBarModel=new PostBarDaoImpl();
-		List<PostBarItem> postBarList=postBarModel.getDataList();
+		List<PostBarItem> postBarList=postBarModel.getDataList(userPhone);
 		Map<String,String> map=new HashMap<>();
 		if(postBarList==null){
 			map.put("result", "fail");

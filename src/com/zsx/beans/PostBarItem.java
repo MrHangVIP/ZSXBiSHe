@@ -19,6 +19,12 @@ public class PostBarItem {
 	private String headUrl;
 	
 	private String orders;
+	
+	private String commentNums;
+	
+	private String likeNums;
+	
+	private String hasLike;
 
 	public int getPostbarId() {
 		return postbarId;
@@ -90,6 +96,30 @@ public class PostBarItem {
 
 	public void setOrders(String orders) {
 		this.orders = orders;
+	}
+
+	public String getCommentNums() {
+		return commentNums;
+	}
+
+	public void setCommentNums(String commentNums) {
+		this.commentNums = commentNums;
+	}
+
+	public String getLikeNums() {
+		return likeNums;
+	}
+
+	public void setLikeNums(String likeNums) {
+		this.likeNums = likeNums;
+	}
+
+	public String getHasLike() {
+		return hasLike;
+	}
+
+	public void setHasLike(String hasLike) {
+		this.hasLike = hasLike;
 	}
 	
 	

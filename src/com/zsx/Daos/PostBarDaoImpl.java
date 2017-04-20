@@ -58,22 +58,22 @@ public class PostBarDaoImpl extends BaseDBFactor<PostBarItem> {
 		return false;
 	}
 
-	public List<PostBarItem> getDataList() {
+	public List<PostBarItem> getDataList(String userphone) {
 		Connection conn = null;
 		List<PostBarItem> postBarList = null;
 		try {
 			conn = getConn();
+			String sql="select ifnull(t_praise_nums.praiseCount,0) as likenums,"
+					+ "ifnull(t_comment_nums.commentCount,0) as commentnums,"
+					+ "case when t_praise.postbarid is null then 0 else 1 end as haslike, "
+					+ "t_postbar.*, t_user.headurl, t_user.nickname "
+					+ "from t_postbar  left JOIN t_user on t_postbar.userphone = t_user.userphone "
+					+ "left JOIN t_praise on t_postbar.postbarid = t_praise.postbarid and t_praise.userphone = ? "
+					+ "LEFT JOIN t_praise_nums ON t_postbar.postbarid = t_praise_nums.postbarid "
+					+ "LEFT JOIN t_comment_nums ON t_postbar.postbarid = t_comment_nums.postbarid "
+					+ "ORDER BY t_postbar.postbarid DESC ";//LIMIT 0, " + count 可以请求条数
 			QueryRunner qr = new QueryRunner();
-			String sql = "select * from t_postbar order by postbarid desc";
-			postBarList = (List<PostBarItem>) qr.query(conn, sql, new BeanListHandler<>(PostBarItem.class));
-			if (postBarList != null) {
-				for (int i = 0; i < postBarList.size(); i++) {
-					sql = "select * from t_user where userphone = ?";
-					UserBean user = (UserBean) qr.query(conn, sql, new BeanHandler<>(UserBean.class),postBarList.get(i).getUserPhone());
-					postBarList.get(i).setHeadUrl(user.getHeadUrl());
-					postBarList.get(i).setNickName(user.getNickName());
-				}
-			}
+			postBarList = (List<PostBarItem>) qr.query(conn, sql, new BeanListHandler<>(PostBarItem.class),userphone);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

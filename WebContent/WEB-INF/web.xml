@@ -122,6 +122,26 @@
 		<servlet-name>GetPostBar</servlet-name>
 		<url-pattern>/GetPostBar</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GetPostList</servlet-name>
+		<servlet-class>com.zsx.servlets.GetPostList</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>GetPostList</servlet-name>
+		<url-pattern>/GetPostList</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>LikePostbar</servlet-name>
+		<servlet-class>com.zsx.servlets.LikePostbar</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>LikePostbar</servlet-name>
+		<url-pattern>/LikePostbar</url-pattern>
+	</servlet-mapping>
 
 
 
