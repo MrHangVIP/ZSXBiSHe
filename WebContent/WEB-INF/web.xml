@@ -142,8 +142,26 @@
 		<servlet-name>LikePostbar</servlet-name>
 		<url-pattern>/LikePostbar</url-pattern>
 	</servlet-mapping>
-
-
+	
+	<servlet>
+		<servlet-name>WriteComment</servlet-name>
+		<servlet-class>com.zsx.servlets.WriteComment</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>WriteComment</servlet-name>
+		<url-pattern>/WriteComment</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GetCommentList</servlet-name>
+		<servlet-class>com.zsx.servlets.GetCommentList</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>GetCommentList</servlet-name>
+		<url-pattern>/GetCommentList</url-pattern>
+	</servlet-mapping>
 
 </web-app>
 

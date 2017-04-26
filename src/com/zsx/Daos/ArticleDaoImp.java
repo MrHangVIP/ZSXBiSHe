@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import com.zsx.Daos.base.BaseDBFactor;
