@@ -34,10 +34,10 @@ public class LikePostbar extends BaseServletFactory {
 		Map<String,String> map=new HashMap<>();
 		if(!result){
 			map.put("result", "fail");
-			map.put("data", "æ“ä½œå¤±è´¥");
+			map.put("data", "²Ù×÷Ê§°Ü");
 		}else{
 			map.put("result", "success");
-			map.put("data", "æ“ä½œæˆåŠŸï¼");
+			map.put("data", "²Ù×÷³É¹¦");
 		}
 		return map;
 	}
